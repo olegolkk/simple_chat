@@ -4,8 +4,18 @@ from typing import Dict, List
 import json
 import uuid
 
-app = FastAPI()
+from starlette.middleware.cors import CORSMiddleware
 
+app = FastAPI(title="WebSocket Chat API", version="1.0.0")
+
+# CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Для production укажите конкретные домены
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class ConnectionManager:
     def __init__(self):
